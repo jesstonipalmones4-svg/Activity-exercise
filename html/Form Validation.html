@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lab 4: Form Validation</title>
+    <style>
+        .error { color: red; margin: 5px 0; }
+        .success { color: green; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <!-- Form layout from Lab 3 -->
+    <form method="post" action="">
+        <p>
+            <label for="username">Name:</label><br>
+            <input type="text" id="username" name="name">
+        </p>
+        
+        <p>
+            <label for="useremail">Email:</label><br>
+            <input type="text" id="useremail" name="email"> 
+        </p>
+        
+        <input type="submit" value="Submit">
+    </form>
+
+    <br>
+
+    <?php
+    // Check if the request method is POST (form was submitted)
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $hasErrors = false;
+
+        // 1. Validate Name Field
+        // trim() removes accidental blank spaces typed by the user
+        if (empty(trim($_POST["name"]))) {
+            echo "<p class='error'>Error: Name is required.</p>";
+            $hasErrors = true;
+        } else {
+            $name = htmlspecialchars($_POST["name"]);
+        }
+
+        // 2. Validate Email Field
+        if (empty(trim($_POST["email"]))) {
+            echo "<p class='error'>Error: Email is required.</p>";
+            $hasErrors = true;
+        } else {
+            $email = htmlspecialchars($_POST["email"]);
+        }
+
+        // 3. Process data only if there are NO errors
+        if (!$hasErrors) {
+            echo "<div class='success'>";
+            echo "<h3>Validation Successful!</h3>";
+            echo "<p>Name: " . $name . "</p>";
+            echo "<p>Email: " . $email . "</p>";
+            echo "</div>";
+        }
+    }
+    ?>
+
+</body>
+</html>

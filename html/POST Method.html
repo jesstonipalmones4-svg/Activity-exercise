@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lab 2: Using POST Method</title>
+</head>
+<body>
+
+    <!-- 1. Form updated to use the POST method -->
+    <form method="post" action="">
+        <label for="username">Name:</label>
+        <input type="text" id="username" name="name" required>
+        <input type="submit" value="Submit">
+    </form>
+
+    <br>
+
+    <?php
+    // 2. PHP logic changed to use the $_POST superglobal
+    if (isset($_POST['name'])) {
+        // Sanitizing the input for security
+        $name = htmlspecialchars($_POST['name']); 
+        
+        if (!empty($name)) {
+            echo "<h3>Hello, " . $name . "!</h3>";
+        } else {
+            echo "<h3>Please enter a name.</h3>";
+        }
+    }
+    ?>
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lab 3: Multiple Inputs</title>
+</head>
+<body>
+
+    <!-- 1. Form with Name and Email inputs -->
+    <form method="post" action="">
+        <p>
+            <label for="username">Name:</label><br>
+            <input type="text" id="username" name="name" required>
+        </p>
+        
+        <p>
+            <label for="useremail">Email:</label><br>
+            <!-- Using type="email" provides basic client-side validation -->
+            <input type="email" id="useremail" name="email" required>
+        </p>
+        
+        <input type="submit" value="Submit Info">
+    </form>
+
+    <br>
+
+    <?php
+    // 2. Check if both form fields have been submitted
+    if (isset($_POST['name']) && isset($_POST['email'])) {
+        
+        // Sanitize inputs to secure against cross-site scripting (XSS)
+        $name = htmlspecialchars($_POST['name']);
+        $email = htmlspecialchars($_POST['email']); 
+        
+        // Validate that fields are not just whitespace
+        if (!empty(trim($name)) && !empty(trim($email))) {
+            echo "<h3>Submitted Information:</h3>";
+            echo "<p><strong>Name:</strong> " . $name . "</p>";
+            echo "<p><strong>Email:</strong> " . $email . "</p>";
+        } else {
+            echo "<p style='color: red;'>Please fill out all fields correctly.</p>";
+        }
+    }
+    ?>
+
+</body>
+</html>

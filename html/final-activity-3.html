@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lab 1: Basic Form Creation</title>
+</head>
+<body>
+
+    <!-- 1. Form using the GET method targeting the same page -->
+    <form method="get" action="">
+        <label for="username">Name:</label>
+        <input type="text" id="username" name="name" required>
+        <input type="submit" value="Submit">
+    </form>
+
+    <br>
+
+    <?php
+    // 2. PHP logic to check and display user input
+    if (isset($_GET['name'])) {
+        // htmlspecialchars prevents security issues like XSS
+        $name = htmlspecialchars($_GET['name']); 
+        
+        if (!empty($name)) {
+            echo "<h3>Hello, " . $name . "!</h3>";
+        } else {
+            echo "<h3>Please enter a name.</h3>";
+        }
+    }
+    ?>
+
+</body>
+</html>
